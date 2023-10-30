@@ -1,31 +1,304 @@
-<div class="d-flex">
+<div class="row">
+  <!-- Layouts & Components Menu-->
   <div class="col-3 border border-bottom-0 border-end">
-    <h4 class="p-2">Components</h4>
-    <div class="row p-2">
-      <div class="col-12" style="cursor: move;">
-        <div cdkDrag class="card shadow p-3 mb-2 bg-body-tertiary rounded"><span
-            class="text-center fw-bold fs-1">Aa</span><span class="text-center text-muted">Heading, Title</span></div>
-      </div>
-      <div cdkDrag class="col-12" style="cursor: move;">
-        <div class="card shadow p-3 mb-2 bg-body-tertiary rounded"><input type="text" placeholder="Text Input Field"
-            disabled class="form-control mt-2" /></div>
-      </div>
-      <div class="row flex">
-        <div class="col-8 d-flex" style="cursor: move;">
-          <div class="example-box card shadow p-3 mb-2 bg-body-tertiary rounded"
-            style="width: 200px; height: 200px; justify-content: center;" cdkDrag>
-            <span class="text-center text-muted">Image</span>
+    <ngx-simplebar style="max-height: 100vh">
+      <!-- Draggable Layouts-->
+      <h4 class="card-title p-2">Layouts</h4>
+      <div class="row p-2">
+        <div class="col-12" style="cursor: move">
+          <div
+            class="card shadow p-2 mb-2 bg-body-tertiary rounded"
+            style="min-height: 40px"
+          >
+            <div class="row px-3">
+              <div
+                class="col-6 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-1
+              </div>
+              <div
+                class="col-6 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-2
+              </div>
+              <!-- <div class="col-3 border border-primary rounded" style="min-height: 40px;">col-3</div> -->
+            </div>
           </div>
         </div>
-        <div class="example-box col-4 shadow p-3 bg-body-tertiary rounded d-flex" style="cursor: move; height: 60px;"
-          cdkDrag>
-          Button
+
+        <div class="col-12" style="cursor: move">
+          <div
+            class="card shadow p-2 mb-2 bg-body-tertiary rounded"
+            style="min-height: 40px"
+          >
+            <div class="row px-3">
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-1
+              </div>
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-2
+              </div>
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-3
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" style="cursor: move">
+          <div
+            class="card shadow p-2 mb-2 bg-body-tertiary rounded"
+            style="min-height: 40px"
+          >
+            <div class="row px-3">
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-1
+              </div>
+              <div
+                class="col-8 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-2
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" style="cursor: move">
+          <div
+            class="card shadow p-2 mb-2 bg-body-tertiary rounded"
+            style="min-height: 40px"
+          >
+            <div class="row px-3">
+              <div
+                class="col-8 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-1
+              </div>
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-2
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-    </div>
+      <!-- Draggable Components-->
+      <h4 class="card-title p-2">Components</h4>
+      <div
+        cdkDropList
+        #componentsList="cdkDropList"
+        class="row p-2"
+        [cdkDropListConnectedTo]="[contentList]"
+        [cdkDropListData]="components"
+        (cdkDropListDropped)="drop($event)"
+        (cdkDropListExited)="exited($event)"
+        (cdkDropListEntered)="entered()"
+      >
+        <div *ngFor="let component of components" cdkDrag [cdkDragData]="component">
+          <div
+            *cdkDragPlaceholder
+            class="col-{{ component.colSize }}"
+            style="cursor: move"
+          >
+            <div
+              *ngIf="component.title === 'Heading'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <span class="text-center fw-bold fs-1">Aa</span
+              ><span class="text-center text-muted">Heading, Title</span>
+            </div>
+            <div
+              *ngIf="component.title === 'TextInputField'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <input
+                type="text"
+                placeholder="Text Input Field"
+                disabled
+                class="form-control mt-2"
+              />
+            </div>
+            <div
+              *ngIf="component.title === 'TextArea'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <textarea
+                cols="100vw"
+                rows="2"
+                disabled
+                class="form-control"
+                placeholder="Text Area Field..."
+              ></textarea>
+            </div>
+            <div
+              *ngIf="component.title === 'Image'"
+              class="card d-flex flex-column align-items-center justify-content-center shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <span class="">Add Image</span>
+              <i class="ri-image-add-fill align-middle me-2 fs-4"></i>
+            </div>
+            <div
+              *ngIf="component.title === 'Button'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <button class="btn btn-dark">Button</button>
+            </div>
+          </div>
+          <div class="col-{{ component.colSize }}" style="cursor: move">
+            <div
+              *ngIf="component.title === 'Heading'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <span class="text-center fw-bold fs-1">Aa</span
+              ><span class="text-center text-muted">Heading, Title</span>
+            </div>
+            <div
+              *ngIf="component.title === 'TextInputField'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <input
+                type="text"
+                placeholder="Text Input Field"
+                disabled
+                class="form-control mt-2"
+              />
+            </div>
+            <div
+              *ngIf="component.title === 'TextArea'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <textarea
+                cols="100vw"
+                rows="2"
+                disabled
+                class="form-control"
+                placeholder="Text Area Field..."
+              ></textarea>
+            </div>
+            <div
+              *ngIf="component.title === 'Image'"
+              class="card d-flex flex-column align-items-center justify-content-center shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <span class="">Add Image</span>
+              <i class="ri-image-add-fill align-middle me-2 fs-4"></i>
+            </div>
+            <div
+              *ngIf="component.title === 'Button'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <button class="btn btn-dark">Button</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="col-12" style="cursor: move">
+          <div class="card shadow p-3 mb-2 bg-body-tertiary rounded">
+            <span class="text-center fw-bold fs-1">Aa</span
+            ><span class="text-center text-muted">Heading, Title</span>
+          </div>
+        </div>
+        <div class="col-12" style="cursor: move">
+          <div class="card shadow p-3 mb-2 bg-body-tertiary rounded">
+            <input
+              type="text"
+              placeholder="Text Input Field"
+              disabled
+              class="form-control mt-2"
+            />
+          </div>
+        </div>
+        <div class="col-6" style="cursor: move">
+          <div class="card shadow p-3 mb-2 bg-body-tertiary rounded">
+            TextArea
+          </div>
+        </div>
+        <div class="col-6" style="cursor: move">Button</div>
+        <div class="col-6" style="cursor: move">Button</div>
+        <div class="col-6" style="cursor: move">Button</div> -->
+      </div>
+    </ngx-simplebar>
   </div>
+
+  <!-- Content Creation Card-->
   <div class="col-9 px-5 py-3 my-1">
-    <div class="card  shadow p-3 mb-2 bg-body-tertiary rounded" style="min-height: 100vh;"></div>
+    <!-- <ngx-simplebar> -->
+    <div
+      cdkDropList
+      [cdkDropListData]="content"
+      (cdkDropListDropped)="drop($event)"
+      #contentList="cdkDropList"
+      class="card content shadow p-3 mb-2 bg-body-tertiary rounded"
+      style="min-height: 80vh"
+    >
+      <div class="content">
+        <div class="item" *ngFor="let item of content" cdkDrag>
+          <div class="col-{{ item.colSize }}" style="cursor: move">
+            <div
+              *ngIf="item.title === 'Heading'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <span class="text-center fw-bold fs-1">Aa</span
+              ><span class="text-center text-muted">Heading, Title</span>
+            </div>
+            <div
+              *ngIf="item.title === 'TextInputField'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <input
+                type="text"
+                placeholder="Text Input Field"
+                disabled
+                class="form-control mt-2"
+              />
+            </div>
+            <div
+              *ngIf="item.title === 'TextArea'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <textarea
+                cols="100vw"
+                rows="2"
+                disabled
+                class="form-control"
+                placeholder="Text Area Field..."
+              ></textarea>
+            </div>
+            <div
+              *ngIf="item.title === 'Image'"
+              class="card d-flex flex-column align-items-center justify-content-center shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <span class="">Add Image</span>
+              <i class="ri-image-add-fill align-middle me-2 fs-4"></i>
+            </div>
+            <div
+              *ngIf="item.title === 'Button'"
+              class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+            >
+              <button class="btn btn-dark">Button</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </ngx-simplebar> -->
   </div>
 </div>
