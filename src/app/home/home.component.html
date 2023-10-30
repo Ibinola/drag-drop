@@ -1,22 +1,148 @@
-<div class="d-flex">
+<div
+  style="max-width: 100vw; max-height: 100vh; overflow-y: hidden"
+  class="row"
+>
+  <!-- Layouts & Components Menu-->
   <div class="col-3 border border-bottom-0 border-end">
-    <h4 class="p-2">Components</h4>
-    <div class="row p-2">
-      <div class="col-12" style="cursor: move;">
-        <div cdkDrag class="card shadow p-3 mb-2 bg-body-tertiary rounded"><span class="text-center fw-bold fs-1">Aa</span><span class="text-center text-muted">Heading, Title</span></div>
+    <ngx-simplebar style="max-height: 100vh">
+      <!-- Draggable Layouts-->
+      <h4 class="card-title p-2">Layouts</h4>
+      <div class="row p-2">
+        <div class="col-12" style="cursor: move">
+          <div
+            class="card shadow p-2 mb-2 bg-body-tertiary rounded"
+            style="min-height: 40px"
+          >
+            <div class="row px-3">
+              <div
+                class="col-6 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-1
+              </div>
+              <div
+                class="col-6 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-2
+              </div>
+              <!-- <div class="col-3 border border-primary rounded" style="min-height: 40px;">col-3</div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" style="cursor: move">
+          <div
+            class="card shadow p-2 mb-2 bg-body-tertiary rounded"
+            style="min-height: 40px"
+          >
+            <div class="row px-3">
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-1
+              </div>
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-2
+              </div>
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-3
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" style="cursor: move">
+          <div
+            class="card shadow p-2 mb-2 bg-body-tertiary rounded"
+            style="min-height: 40px"
+          >
+            <div class="row px-3">
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-1
+              </div>
+              <div
+                class="col-8 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-2
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" style="cursor: move">
+          <div
+            class="card shadow p-2 mb-2 bg-body-tertiary rounded"
+            style="min-height: 40px"
+          >
+            <div class="row px-3">
+              <div
+                class="col-8 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-1
+              </div>
+              <div
+                class="col-4 border border-primary rounded"
+                style="min-height: 40px"
+              >
+                col-2
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div cdkDrag class="col-12" style="cursor: move;">
-        <div class="card shadow p-3 mb-2 bg-body-tertiary rounded"><input type="text" placeholder="Text Input Field" disabled class="form-control mt-2"/></div>
+
+      <!-- Draggable Components-->
+      <h4 class="card-title p-2">Components</h4>
+      <div class="row p-2">
+        <div class="col-12" style="cursor: move; z-index: 100">
+          <div cdkDrag class="card shadow p-3 mb-2 bg-body-tertiary rounded">
+            <span class="text-center fw-bold fs-1">Aa</span
+            ><span class="text-center text-muted">Heading, Title</span>
+          </div>
+        </div>
+        <div cdkDrag class="col-12" style="cursor: move">
+          <div class="card shadow p-3 mb-2 bg-body-tertiary rounded">
+            <input
+              type="text"
+              placeholder="Text Input Field"
+              disabled
+              class="form-control mt-2"
+            />
+          </div>
+        </div>
+        <div cdkDrag class="col-6" style="cursor: move">
+          <div class="card shadow p-3 mb-2 bg-body-tertiary rounded">
+            TextArea
+          </div>
+        </div>
+        <div class="col-6" style="cursor: move">Button</div>
+        <div class="col-6" style="cursor: move">Button</div>
+        <div class="col-6" style="cursor: move">Button</div>
       </div>
-      <div cdkDrag class="col-6" style="cursor: move;">
-        <div class="card shadow p-3 mb-2 bg-body-tertiary rounded">TextArea</div>
-      </div>
-      <div class="col-6" style="cursor: move;">Button</div>
-      <div class="col-6" style="cursor: move;">Button</div>
-      <div class="col-6" style="cursor: move;">Button</div>
-    </div>
+    </ngx-simplebar>
   </div>
+
+  <!-- Content Creation Card-->
   <div class="col-9 px-5 py-3 my-1">
-    <div class="card  shadow p-3 mb-2 bg-body-tertiary rounded" style="min-height: 100vh;"></div>
+    <ngx-simplebar>
+      <div
+        cdkDropList
+        class="card shadow p-3 mb-2 bg-body-tertiary rounded"
+        style="min-height: 95vh; max-height: 100vh"
+      ></div>
+    </ngx-simplebar>
   </div>
 </div>
