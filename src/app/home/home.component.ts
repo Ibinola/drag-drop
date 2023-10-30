@@ -8,6 +8,8 @@ import { CdkDrag, copyArrayItem } from '@angular/cdk/drag-drop';
 })
 export class HomeComponent implements OnInit {
 
+  
+
   constructor() { }
 
   ngOnInit(): void {
