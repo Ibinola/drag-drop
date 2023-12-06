@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkDrag, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDrag, copyArrayItem, moveItemInArray, transferArrayItem, CdkDragExit, CdkDragDrop } from '@angular/cdk/drag-drop';
 
 export interface Components{
   id: number;
@@ -11,6 +11,13 @@ export interface Components{
   temp?: boolean;
 }
 
+export interface Layouts {
+  columns: {
+    colSize: number;
+    content: string;
+  }[];
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,52 +27,48 @@ export class HomeComponent implements OnInit {
 
   components: Components[] = [];
   content: Components[] = [];
+  layouts: string[] = []
+  transferringItem: string | undefined = undefined;
+  isEditing = false;
   constructor() { }
 
   ngOnInit(): void {
-    this.components = [ 
+    this.components = [
       {id: 1, title: 'Heading', imageUrl: '', description: '', label: '', colSize: 12},
       {id: 2, title: 'TextInputField', imageUrl: '', description: '', label: '', colSize: 12 },
       {id: 3, title: 'TextArea', imageUrl: '', description: '', label: '', colSize: 12},
       {id: 4, title: 'Image', imageUrl: '', description: '', label: '', colSize: 6},
       {id: 5, title: 'Button', imageUrl: '', description: '', label: '', colSize: 6},
     ]
+
+    this.layouts = ['equalDoubleLayout', 'equalTripleLayout', 'customLayout', 'reversedCustomLayout']
+
   }
 
   drop(event: any) {
     console.log(event);
-    if (event.previousContainer !== event.container) {
-      copyArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      copyArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
     }
-    if (event.previousContainer.data) {
-      this.components = this.components.filter((f) => !f.temp);
+    this.transferringItem = undefined;
+  }
+
+
+
+  exited(e: any) {
+    this.transferringItem = e.item.data;
+  }
+
+  entered() {
+    if (this.transferringItem) {
+
+      this.transferringItem = undefined;
     }
   }
 
-  exited(event: any) {
-    console.log('on exit:', event);
-    const currentId = event.container.data.findIndex(
-      (f: any) => f.id === event.item.dropContainer.data.id
-    );
-    this.components.splice(currentId + 1, 0, {
-      ...event.item.data,
-      temp: true,
-    });
-  }
-
-  entered(event?: any) {
-    this.components = this.components.filter((f) => !f.temp);
-    console.log(this.components)
-  }
 }
